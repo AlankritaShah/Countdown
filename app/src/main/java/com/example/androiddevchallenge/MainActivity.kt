@@ -15,7 +15,6 @@
  */
 package com.example.androiddevchallenge
 
-import android.R
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.activity.compose.setContent
@@ -130,6 +129,18 @@ fun MyApp(viewModel: CountDownViewModel) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(Modifier.height(30.dp))
+
+            AnimatedVisibility(
+                visible = isRunning,
+                enter = fadeIn(initialAlpha = 0.5f),
+                exit = fadeOut(animationSpec = tween(durationMillis = 500))
+            ) {
+                ShowProgress(countDownProgress, countDownDisplayProgress)
+            }
+
+            Spacer(Modifier.height(60.dp))
+
             Row {
                 OutlinedTextField(
                     value = hr.value,
@@ -190,16 +201,6 @@ fun MyApp(viewModel: CountDownViewModel) {
                 } else {
                     Text("Start")
                 }
-            }
-
-            Spacer(Modifier.height(60.dp))
-
-            AnimatedVisibility(
-                visible = isRunning,
-                enter = fadeIn(initialAlpha = 0.5f),
-                exit = fadeOut(animationSpec = tween(durationMillis = 500))
-            ) {
-                ShowProgress(countDownProgress, countDownDisplayProgress)
             }
         }
     }
