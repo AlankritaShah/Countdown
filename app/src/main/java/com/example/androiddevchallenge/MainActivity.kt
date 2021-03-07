@@ -71,7 +71,7 @@ class CountDownViewModel : ViewModel() {
     val countDownDisplayProgress = MutableLiveData("")
     val countDownProgress = MutableLiveData(1.0)
     val isRunning = MutableLiveData(false)
-    var countDown: CountDownTimer? = null
+    private var countDown: CountDownTimer? = null
 
     fun startCountDown(timeInMillis: Long) {
         isRunning.value = true
